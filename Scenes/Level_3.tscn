@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://cvayneex55gb0"]
+
+[ext_resource type="PackedScene" uid="uid://ey5jrrt44s0d" path="res://Scenes/Ball.tscn" id="1_s0xyj"]
+[ext_resource type="PackedScene" uid="uid://b8an2s3gde4sr" path="res://Scenes/Stadium.tscn" id="2_38glg"]
+[ext_resource type="Texture2D" uid="uid://e4imxvifauth" path="res://Materials/basketball_img.png" id="2_ccifb"]
+[ext_resource type="PackedScene" uid="uid://cews6jd2tlf8n" path="res://Scenes/wall.tscn" id="3_ccifb"]
+[ext_resource type="Texture2D" uid="uid://dkunmropsmr63" path="res://Materials/basketball_court_img.jpg" id="4_ale0u"]
+[ext_resource type="PackedScene" uid="uid://dto8a0r8x10bq" path="res://Scenes/level_finish_goal_basket.tscn" id="5_38glg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nw7js"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_nh7xm"]
+sky_material = SubResource("ProceduralSkyMaterial_nw7js")
+
+[sub_resource type="Environment" id="Environment_j0k67"]
+background_mode = 2
+sky = SubResource("Sky_nh7xm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_38glg"]
+rough = true
+bounce = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6xtq"]
+albedo_texture = ExtResource("2_ccifb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvi3f"]
+albedo_texture = ExtResource("4_ale0u")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[node name="Level_3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j0k67")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.860048, 0.510213, 0, -0.510213, 0.860048, -1.22634, 5.02746, 7.79471)
+
+[node name="Ball" parent="." instance=ExtResource("1_s0xyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60763, 3.3227, -1.12631)
+physics_material_override = SubResource("PhysicsMaterial_38glg")
+
+[node name="MeshInstance3D" parent="Ball" index="0"]
+material_override = SubResource("StandardMaterial3D_k6xtq")
+
+[node name="Stadium" parent="." instance=ExtResource("2_38glg")]
+
+[node name="MeshInstance3D" parent="Stadium" index="0"]
+material_override = SubResource("StandardMaterial3D_dvi3f")
+
+[node name="level_finish_goal_basket" parent="Stadium" instance=ExtResource("5_38glg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.35171, 0.552629, 0.189054)
+skeleton = NodePath("../..")
+
+[node name="Wall" parent="Stadium" instance=ExtResource("3_ccifb")]
+transform = Transform3D(-0.0295092, 0, -0.999565, 0, 1, 0, 0.999565, 0, -0.0295092, 4.19874, 1.5, 2.71443)
+
+[node name="Wall2" parent="Stadium" instance=ExtResource("3_ccifb")]
+transform = Transform3D(0.00895341, 0, -0.99996, 0, 1, 0, 0.99996, 0, 0.00895341, 1.35509, 1.5, -1.51196)
+
+[node name="Wall3" parent="Stadium" instance=ExtResource("3_ccifb")]
+transform = Transform3D(0.0598813, 0, -0.998205, 0, 1, 0, 0.998205, 0, 0.0598813, -2.50508, 1.5, 1.44727)
+
+[editable path="Ball"]
+[editable path="Stadium"]

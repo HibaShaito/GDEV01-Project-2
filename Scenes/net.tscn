@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://os6ogo6utfrl"]
+
+[ext_resource type="Texture2D" uid="uid://b4cham7gn8egh" path="res://Materials/net.jpg" id="1_0ln44"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ky24w"]
+size = Vector3(2.68988, 1.06042, 0.129761)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rmr2"]
+albedo_texture = ExtResource("1_0ln44")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_y4uc0"]
+
+[node name="Net" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0140076, 0.0302124, 0.0010376)
+shape = SubResource("BoxShape3D_ky24w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.67952, 9.20562e-08, 0, 2.34251e-07, 1.053, 0, 0, 0, -0.037, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0rmr2")
+mesh = SubResource("BoxMesh_y4uc0")
+skeleton = NodePath("")

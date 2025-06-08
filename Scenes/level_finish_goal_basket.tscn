@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dto8a0r8x10bq"]
+
+[ext_resource type="ArrayMesh" uid="uid://bu2be888ixke3" path="res://Materials/Basket_hoop.obj" id="1_cdu8w"]
+[ext_resource type="Script" uid="uid://3psctv51i6b2" path="res://Scripts/level_finish.gd" id="2_c1ndk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cdu8w"]
+radius = 1.03414
+
+[node name="level_finish_goal_basket" type="MeshInstance3D"]
+mesh = ExtResource("1_cdu8w")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999939, -0.0110477, 0, 0.0110477, 0.999939, 0, 0, 0)
+script = ExtResource("2_c1ndk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48279, -0.473209)
+shape = SubResource("SphereShape3D_cdu8w")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

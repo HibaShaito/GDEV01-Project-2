@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cq0q0hgt7sw2x"]
+
+[ext_resource type="PackedScene" uid="uid://b8an2s3gde4sr" path="res://Scenes/Stadium.tscn" id="2_i63mn"]
+[ext_resource type="PackedScene" uid="uid://ey5jrrt44s0d" path="res://Scenes/Ball.tscn" id="2_vnunq"]
+[ext_resource type="PackedScene" uid="uid://cews6jd2tlf8n" path="res://Scenes/wall.tscn" id="3_vnunq"]
+[ext_resource type="PackedScene" uid="uid://gqxswbvgjung" path="res://Scenes/level_finish_goal.tscn" id="4_nw7js"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nw7js"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_nh7xm"]
+sky_material = SubResource("ProceduralSkyMaterial_nw7js")
+
+[sub_resource type="Environment" id="Environment_j0k67"]
+background_mode = 2
+sky = SubResource("Sky_nh7xm")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level_1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j0k67")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.860048, 0.510213, 0, -0.510213, 0.860048, -1.22634, 5.02746, 7.79471)
+
+[node name="Ball" parent="." instance=ExtResource("2_vnunq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86835, 3.3227, -0.397355)
+
+[node name="Stadium" parent="." instance=ExtResource("2_i63mn")]
+
+[node name="Wall" parent="Stadium" instance=ExtResource("3_vnunq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1.54742, -2)
+
+[node name="Wall2" parent="Stadium" instance=ExtResource("3_vnunq")]
+transform = Transform3D(-0.0254093, 0, 0.999677, 0, 1, 0, -0.999677, 0, -0.0254093, -0.0378087, 1.5, 2.2881)
+
+[node name="Level_Finish_Goal" parent="Stadium" instance=ExtResource("4_nw7js")]
+transform = Transform3D(-1, 0, -1.79606e-07, 0, 1.4446, 0, 8.74228e-08, 0, -2.05445, -5.9056, 0.511387, -0.00791407)
+skeleton = NodePath("../..")

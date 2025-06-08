@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://ey5jrrt44s0d"]
+
+[ext_resource type="Texture2D" uid="uid://drlpvfvj4bajv" path="res://Materials/soccer_texture_img.png" id="1_7nh6h"]
+[ext_resource type="Script" uid="uid://blmv1t0e0xcth" path="res://Scripts/ball.gd" id="1_eb1ap"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eb1ap"]
+rough = true
+absorbent = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb1ap"]
+albedo_texture = ExtResource("1_7nh6h")
+
+[sub_resource type="SphereMesh" id="SphereMesh_rmwm4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7nh6h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eb1ap"]
+font_size = 35
+
+[node name="Ball" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_eb1ap")
+script = ExtResource("1_eb1ap")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_eb1ap")
+mesh = SubResource("SphereMesh_rmwm4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7nh6h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Lives" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 133.0
+grow_vertical = 0
+text = "Lives : 3"
+label_settings = SubResource("LabelSettings_eb1ap")
